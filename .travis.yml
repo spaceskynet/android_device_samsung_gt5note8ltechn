@@ -2,6 +2,7 @@ os: linux
 dist: focal
 group: edge
 language: generic
+sudo: required
 git:
   depth: 1
 addons:
@@ -15,7 +16,10 @@ addons:
 services:
   - docker
 before_install:
-  - docker pull fr3akyphantom/droid-builder:focal --registry-mirror=https://ghcr.io
+  - mkdir /etc/docker/
+  - echo '{"registry-mirrors": ["https://ghcr.io"]}' >> /etc/docker/daemon.json
+  - service docker restart
+  - docker pull fr3akyphantom/droid-builder:focal
 before_script:
   - cd $HOME && mkdir twrp
   # Download the TWRP Compressed Source Files from PhantomZone54's Release
