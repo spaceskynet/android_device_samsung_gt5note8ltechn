@@ -15,7 +15,7 @@ addons:
 services:
   - docker
 before_install:
-  - docker pull fr3akyphantom/droid-builder:focal
+  - docker pull fr3akyphantom/droid-builder:focal --registry-mirror=https://ghcr.io
 before_script:
   - cd $HOME && mkdir twrp
   # Download the TWRP Compressed Source Files from PhantomZone54's Release
