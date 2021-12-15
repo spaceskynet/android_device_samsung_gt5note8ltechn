@@ -5,6 +5,8 @@ language: generic
 branches:
   only:
     - main
+    - /^v\d/
+    - release
 git:
   depth: 1
 addons:
