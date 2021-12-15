@@ -1,0 +1,1 @@
+# android_device_samsung_gt5note8ltechn
