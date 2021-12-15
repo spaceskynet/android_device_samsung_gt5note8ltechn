@@ -16,10 +16,9 @@ addons:
 services:
   - docker
 before_install:
-  - mkdir /etc/docker/
   - | 
-    echo '{"registry-mirrors": ["https://ghcr.io"]}' >> /etc/docker/daemon.json
-  - service docker restart
+    sudo echo '{"registry-mirrors": ["https://ghcr.io"]}' >> /etc/docker/daemon.json
+  - sudo systemctl restart docker
   - docker pull fr3akyphantom/droid-builder:focal
 before_script:
   - cd $HOME && mkdir twrp
