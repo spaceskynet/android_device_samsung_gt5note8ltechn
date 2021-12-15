@@ -44,12 +44,11 @@ script:
   - cd $HOME/twrp/ && git clone https://github.com/spaceskynet/android_device_samsung_gt5note8ltechn.git device/samsung/gt5note8ltechn
   - rm -rf bootable/recovery && git clone https://github.com/omnirom/android_bootable_recovery -b android-9.0 --depth 1 bootable/recovery
   - |
-    docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/home/builder/twrp/:rw,z" -v "${HOME}/.ccache:/srv/ccache:rw,z" fr3akyphantom/droid-builder bash << EOF
+    docker run --rm -i -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v "$(pwd):/home/builder/twrp/:rw,z" -v "${HOME}/.ccache:/srv/ccache:rw,z" fr3akyphantom/droid-builder:focal bash << EOF
     cd /home/builder/twrp/
     source build/envsetup.sh
     # Choose build flavor as "eng" or "userdebug"
-    BUILD_FLAVOR="userdebug"
-    lunch omni_gt5note8ltechn-${BUILD_FLAVOR}
+    lunch omni_gt5note8ltechn-eng
     make -j$(nproc --all) recoveryimage
     exit
     EOF
