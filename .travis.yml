@@ -42,9 +42,11 @@ before_script:
 script:
   # Replace your ${_USERNAME_}, ${_REPO_SLUG_}, ${_VENDORNAME_}, ${_CODENAME_}
   - cd $HOME/twrp/ && git clone https://github.com/spaceskynet/android_device_samsung_gt5note8ltechn.git device/samsung/gt5note8ltechn
+  - mkdir -p .repo/local_manifests
+  - mkdir -p out
   - rm -rf bootable/recovery && git clone https://github.com/omnirom/android_bootable_recovery -b android-9.0 --depth 1 bootable/recovery
   - |
-    sudo docker run --rm -i -v "$(pwd):/home/builder/twrp/:rw,z" -v "${HOME}/.ccache:/srv/ccache:rw,z" fr3akyphantom/droid-builder:focal bash << EOF
+    sudo docker run --user 1001 --rm -i -v "$(pwd):/home/builder/twrp/:rw,z" -v "${HOME}/.ccache:/srv/ccache:rw,z" fr3akyphantom/droid-builder:focal bash << EOF
     cd /home/builder/twrp/
     source build/envsetup.sh
     lunch omni_gt5note8ltechn-eng
